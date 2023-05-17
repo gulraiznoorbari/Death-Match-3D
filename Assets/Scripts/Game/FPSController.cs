@@ -15,6 +15,8 @@ public class FPSController : NetworkBehaviour, IDamageable
 
     private Rigidbody rb;
 
+    int idle, walk, run, crouch, jump;
+
     [Header("Player Camera")]
     [SerializeField] private Transform playerCam;
     [SerializeField] private Transform orientation;
@@ -24,6 +26,8 @@ public class FPSController : NetworkBehaviour, IDamageable
     private float yRotation;
 
     [Header("Player Movement")]
+    //[SerializeField] private Animator animator;
+    //[SerializeField] private NetworkAnimator networkAnimator;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
     [SerializeField] private float wallRunSpeed;
@@ -80,6 +84,14 @@ public class FPSController : NetworkBehaviour, IDamageable
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        /*
+        idle = Animator.StringToHash("idle");
+        walk = Animator.StringToHash("walking");
+        run = Animator.StringToHash("run");
+        crouch = Animator.StringToHash("crouch");
+        jump = Animator.StringToHash("jump");
+        */
 
         if (isLocalPlayer)
         {
@@ -236,7 +248,10 @@ public class FPSController : NetworkBehaviour, IDamageable
 
         // on ground
         if (isGrounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            //networkAnimator.SetTrigger(walk);
+        }
         // in air:
         else if (!isGrounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
