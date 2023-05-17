@@ -96,11 +96,6 @@ public class FPSController : NetworkBehaviour, IDamageable
             CanvasManager.instance.localPlayer = this;
             CanvasManager.instance.AmmoCountText.text = AmmoCount.ToString() + "/" + AmmoCountMax.ToString();
 
-            //foreach (GameObject go in disableOnClient)
-            //{
-            //    go.SetActive(false);
-            //}
-
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -492,7 +487,6 @@ public class FPSController : NetworkBehaviour, IDamageable
     //[ClientRpc]
     //void RpcPlayerDie()
     //{
-    //    GetComponent<Collider>().enabled = false;
     //    foreach (GameObject item in disableOnDeath)
     //    {
     //        item.SetActive(false);
@@ -502,8 +496,6 @@ public class FPSController : NetworkBehaviour, IDamageable
     //[ClientRpc]
     //void RpcPlayerRespawn()
     //{
-    //    GetComponent<Collider>().enabled = true;
-
     //    foreach (GameObject item in disableOnDeath)
     //    {
     //        item.SetActive(true);
